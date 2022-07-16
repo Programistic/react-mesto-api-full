@@ -1,0 +1,7 @@
+.card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 282px 80px;
+  grid-template-areas: 'card-top'
+                       'card-bottom';
+}

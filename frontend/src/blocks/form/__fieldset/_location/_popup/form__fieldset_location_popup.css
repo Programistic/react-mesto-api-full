@@ -1,0 +1,9 @@
+.form__fieldset_location_popup {
+  margin: 0 0 48px;
+}
+
+@media screen and (max-width: 580px) {
+  .form__fieldset_location_popup {
+    margin: 0 0 45px;
+  }
+}

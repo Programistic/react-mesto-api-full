@@ -1,0 +1,19 @@
+.menu__item {
+  display: flex;
+}
+
+@media screen and (max-width: 580px) {
+  .menu__item {
+    display: block;
+    width: 24px;
+    height: 25px;
+    padding: 0;
+    background-image: linear-gradient(
+      #fff 3px,
+      #000 1px
+    );
+    background-size: 25px 10px;
+    background-repeat: repeat-y;
+    transition: opacity .15s ease;
+  }
+}

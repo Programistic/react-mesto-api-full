@@ -1,0 +1,11 @@
+.form__input_location_entry-screen {
+  width: 100%;
+  font: 400 14px/17px 'Inter', 'Arial', sans-serif;
+}
+
+@media screen and (max-width: 580px) {
+  .form__input_location_entry-screen {
+    width: 260px;
+    font: 400 14px/17px 'Inter', 'Arial', sans-serif;
+  }
+}

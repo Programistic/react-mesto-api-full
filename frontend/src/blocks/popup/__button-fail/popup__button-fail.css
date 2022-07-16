@@ -1,0 +1,4 @@
+.popup__button-fail {
+  background: url(../../../images/fail.svg) center no-repeat rgba(0, 0, 0, 0);
+  background-size: contain;
+}

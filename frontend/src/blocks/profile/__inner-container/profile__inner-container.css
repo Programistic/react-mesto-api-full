@@ -1,0 +1,12 @@
+.profile__inner-container {
+  grid-area: inner-container;
+  display: flex;
+}
+
+@media screen and (max-width: 580px) {
+  .profile__inner-container {
+    display: grid;
+    grid-template-columns: 28px 1fr 28px;
+    grid-template-areas: '. user-name button-edit';
+  }
+}

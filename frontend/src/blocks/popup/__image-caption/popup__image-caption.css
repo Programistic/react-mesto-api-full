@@ -1,0 +1,8 @@
+.popup__image-caption {
+  grid-area: image-caption;
+  align-self: end;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font: 400 12px/14.52px 'Inter', 'Arial', sans-serif;
+}

@@ -1,0 +1,7 @@
+.form__input-error {
+  position: absolute;
+  display: block;
+  color: #f00;
+  font: 400 12px/14.52px 'Inter', 'Arial', sans-serif;
+  opacity: 0;
+}

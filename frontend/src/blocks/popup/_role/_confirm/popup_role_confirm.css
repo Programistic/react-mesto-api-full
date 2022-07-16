@@ -1,0 +1,19 @@
+.popup_role_confirm {
+  display: grid;
+  grid-template-columns: 1fr 40px 430px 40px 1fr;
+  grid-template-rows: calc(((100% - 221px) / 2) - 20px) 40px 181px;
+  grid-template-areas: '. . . . .'
+                       '. . . button-close .'
+                       '. . popup . .';
+  background-color: rgba(0, 0, 0, .5);
+}
+
+@media screen and (max-width: 580px) {
+  .popup_role_confirm {
+    grid-template-columns: 1fr 282px 1fr;
+    grid-template-rows: calc(((100% - 210px) / 2) - 18px) 36px 174px;
+    grid-template-areas: '. . .'
+                         '. button-close .'
+                         '. popup .';
+  }
+}

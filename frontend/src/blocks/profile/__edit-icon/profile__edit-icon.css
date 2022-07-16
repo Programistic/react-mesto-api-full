@@ -1,0 +1,17 @@
+.profile__edit-icon {
+  grid-area: avatar;
+  align-self: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+
+.profile__edit-icon:hover {
+  cursor: pointer;
+  background: url(../../../images/edit.svg) center no-repeat rgba(0, 0, 0, .8);
+  background-size: 26px 26px;
+  opacity: 1;
+}
+

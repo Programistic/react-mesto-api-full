@@ -1,0 +1,9 @@
+.menu__link_mobile {
+  
+}
+
+@media screen and (max-width: 580px) {
+  .menu__link_mobile {
+    display: none;
+  }
+}

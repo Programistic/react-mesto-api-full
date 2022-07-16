@@ -1,0 +1,20 @@
+.popup__button-confirm {
+  width: 120px;
+  height: 120px;
+  margin: 26px auto 0;
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  transition: opacity .15s ease;
+}
+
+.popup__button-confirm:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+@media screen and (max-width: 580px) {
+  .popup__button-confirm {
+    margin: 25px auto 0;
+  }
+}

@@ -1,0 +1,9 @@
+.form__input_theme_black {
+  color: #ccc;
+  background-color: #000;
+  border-bottom: 2px solid #ccc;
+}
+
+.form__input_theme_black:focus {
+  border-bottom: 2px solid #ccc;
+}

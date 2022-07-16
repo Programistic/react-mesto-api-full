@@ -1,0 +1,4 @@
+.popup__button-success {
+  background: url(../../../images/success.svg) center no-repeat rgba(0, 0, 0, 0);
+  background-size: contain;
+}

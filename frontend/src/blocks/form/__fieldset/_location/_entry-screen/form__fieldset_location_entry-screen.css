@@ -1,0 +1,9 @@
+.form__fieldset_location_entry-screen {
+  margin: 0 0 216px;
+}
+
+@media screen and (max-width: 580px) {
+  .form__fieldset_location_entry-screen {
+    margin: 0 0 173px;
+  }
+}

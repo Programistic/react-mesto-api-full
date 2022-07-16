@@ -1,0 +1,12 @@
+.entry-screen__signin {
+  display: flex;
+  justify-content: center;
+  margin: 15px auto 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 580px) {
+  .entry-screen__signin {
+    margin: 20px auto 0;
+  }
+}

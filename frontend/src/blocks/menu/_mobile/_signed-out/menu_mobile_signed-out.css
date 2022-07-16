@@ -1,0 +1,7 @@
+@media screen and (max-width: 580px) {
+  .menu_mobile_signed-out {
+    margin-right: calc(((100% - 282px) / 2) + 11px);
+    padding: 0;
+    transition: opacity .15s ease;
+  }
+}

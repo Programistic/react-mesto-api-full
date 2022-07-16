@@ -1,0 +1,12 @@
+.footer__author {
+  margin: 0;
+  padding: 0;
+  color: #545454;
+  font: 400 18px/21.78px 'Inter', 'Arial', sans-serif;
+}
+
+@media screen and (max-width: 580px) {
+  .footer__author {
+    font: 400 14px/16.94px 'Inter', 'Arial', sans-serif;
+  }
+}

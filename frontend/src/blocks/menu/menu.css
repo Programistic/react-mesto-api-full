@@ -1,0 +1,18 @@
+.menu {
+  display: flex;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.menu:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 580px) {
+  .menu {
+    margin-right: calc(((100% - 282px) / 2) + 11px);
+    padding: 0;
+    transition: opacity .15s ease;
+  }
+}

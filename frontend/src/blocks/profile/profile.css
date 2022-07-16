@@ -1,0 +1,21 @@
+.profile {
+  display: grid;
+  grid-template-columns: 150px minmax(35%, calc(100% - 300px)) 150px;
+  grid-template-rows: 77px 43px;
+  grid-template-areas: 'avatar inner-container button-add'
+                       'avatar user-info button-add';
+}
+
+@media screen and (max-width: 580px) {
+  .profile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px 55px 25px 86px;
+    grid-template-areas: 'avatar'
+                         'inner-container'
+                         'user-info'
+                         'button-add';
+    justify-items: center;
+    align-items: end;
+    padding: 0 19px;
+  }
+}

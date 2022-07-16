@@ -1,0 +1,14 @@
+.entry-screen {
+  width: 358px;
+  height: 429px;
+  margin: 0 auto;
+  padding: 20px 0 0;
+}
+
+@media screen and (max-width: 580px) {
+  .entry-screen {
+    width: 260px;
+    height: 367px;
+    padding: 0;
+  }
+}

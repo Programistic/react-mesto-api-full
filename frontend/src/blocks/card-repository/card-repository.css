@@ -1,0 +1,13 @@
+.card-repository {
+  margin: 0 auto;
+  padding: 51px 0 0;
+  min-height: 49vh;
+}
+
+@media screen and (max-width: 580px) {
+  .card-repository {
+    max-width: 282px;
+    padding: 36px 19px 0;
+    min-height: 40vh;
+  }
+}

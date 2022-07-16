@@ -1,0 +1,13 @@
+.entry-screen__login-link {
+  margin: 0 0 0 5px;
+  padding: 0;
+  color: #fff;
+  font: 400 14px/17px 'Inter', 'Arial', sans-serif;
+  text-decoration: none;
+  transition: opacity .15s ease;
+}
+
+.entry-screen__login-link:hover {
+  cursor: pointer;
+  opacity: .8;
+}

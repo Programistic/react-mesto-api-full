@@ -1,0 +1,19 @@
+.popup_role_create {
+  display: grid;
+  grid-template-columns: 1fr 40px 430px 40px 1fr;
+  grid-template-rows: calc(((100% - 370px) / 2) - 20px) 40px 330px;
+  grid-template-areas: '. . . . .'
+                       '. . . button-close .'
+                       '. . popup . .';
+  background-color: rgba(0, 0, 0, .5);
+}
+
+@media screen and (max-width: 580px) {
+  .popup_role_create {
+    grid-template-columns: 1fr 282px 1fr;
+    grid-template-rows: calc(((100% - 358px) / 2) - 18px) 36px 322px;
+    grid-template-areas: '. . .'
+                         '. button-close .'
+                         '. popup .';
+  }
+}

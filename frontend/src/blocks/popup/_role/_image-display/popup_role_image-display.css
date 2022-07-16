@@ -1,0 +1,21 @@
+.popup_role_image-display {
+  display: grid;
+  grid-template-columns: 1fr 40px 75vw 40px 1fr;
+  grid-template-rows: calc(((100% - 75vh) / 2) - 40px) 40px 75vh 24px;
+  grid-template-areas: '. . . . .'
+                       '. . . button-close .'
+                       '. . popup . .'
+                       '. . image-caption . .';
+  background-color: rgba(0, 0, 0, .9);
+}
+
+@media screen and (max-width: 580px) {
+  .popup_role_image-display {
+    grid-template-columns: 1fr 75vw 1fr;
+    grid-template-rows: calc(((100% - 75vh) / 2) - 36px) 36px 75vh 24px;
+    grid-template-areas: '. . .'
+                         '. button-close .'
+                         '. popup .'
+                         '. image-caption .';
+  }
+}
