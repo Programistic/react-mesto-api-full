@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
-function Login({handleLoginSubmit}) {
-
+function Login({ handleLoginSubmit }) {
   const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('')
+  const [userPassword, setUserPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -11,15 +10,15 @@ function Login({handleLoginSubmit}) {
       return;
     }
     handleLoginSubmit(userEmail, userPassword);
-  }
+  };
 
   const handleEmailChange = (event) => {
     setUserEmail(event.target.value);
-  }
+  };
 
   const handlePasswordChange = (event) => {
     setUserPassword(event.target.value);
-  }
+  };
 
   return (
     <div className="entry-screen">

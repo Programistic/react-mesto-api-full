@@ -1,5 +1,4 @@
-function ImagePopup({card, onClose}) {
-
+function ImagePopup({ card, onClose }) {
   const popupOpened = card.link ? 'popup_opened' : '';
 
   return (

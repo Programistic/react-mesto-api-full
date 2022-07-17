@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({isOpen, onUpdateAvatar, onClose}) {
-
+function EditAvatarPopup({ isOpen, onUpdateAvatar, onClose }) {
   const [textOnSubmit, setTextOnSubmit] = useState('');
 
   const inputAvatarSrc = useRef();
@@ -11,7 +10,7 @@ function EditAvatarPopup({isOpen, onUpdateAvatar, onClose}) {
     event.preventDefault();
     setTextOnSubmit('Сохранение...');
     onUpdateAvatar(inputAvatarSrc.current.value);
-  }
+  };
 
   useEffect(() => {
     inputAvatarSrc.current.value = '';

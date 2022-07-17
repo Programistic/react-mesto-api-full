@@ -1,5 +1,10 @@
 import { Component } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  Redirect,
+  withRouter,
+} from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
 import Header from './Header';
@@ -42,119 +47,119 @@ class App extends Component {
 
   handleEditProfileClick = () => {
     this.setState({ isEditProfilePopupOpen: true });
-  }
+  };
 
   handleAddPlaceClick = () => {
     this.setState({ isAddPlacePopupOpen: true });
-  }
+  };
 
   handleEditAvatarClick = () => {
     this.setState({ isEditAvatarPopupOpen: true });
-  }
+  };
 
   handleConfirmDeleteCardClick = () => {
     this.setState({ isConfirmPopupOpen: true });
-  }
+  };
 
   handleEscClick = (event) => {
     if (event.key === 'Escape') {
       this.closeAllPopups();
     }
-  }
+  };
 
   handleOutsideClick = (event) => {
     if (event.target.classList.contains('popup')) {
       this.closeAllPopups();
     }
-  }
+  };
 
   handleUpdateUser = (userName, userDescription) => {
     api.setUserInfo(userName, userDescription)
-      .then(userData => {
+      .then((userData) => {
         this.setState({ currentUser: userData });
         this.closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   handleUpdateAvatar = (userAvatar) => {
     api.setAvatar(userAvatar)
-      .then(userData => {
+      .then((userData) => {
         this.setState({ currentUser: userData });
         this.closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   handleCardLike = (card) => {
-    const isLiked = card.likes.some(like => like._id === this.state.currentUser._id);
+    const isLiked = card.likes.some((like) => like._id === this.state.currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked)
-      .then(getCard => {
-        this.setState({ cards: this.state.cards.map(oldCard => oldCard._id === getCard._id ? getCard : oldCard) });
+      .then((getCard) => {
+        this.setState({ cards: this.state.cards.map((oldCard) => oldCard._id === getCard._id ? getCard : oldCard) });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   handleCardDelete = () => {
     api.deleteCard(this.state.deleteCard._id)
       .then(() => {
         this.setState({
-          cards: this.state.cards.filter(currentCard => currentCard._id !== this.state.deleteCard._id),
-          isConfirmPopupOpen: false
-        }); 
+          cards: this.state.cards.filter((currentCard) => currentCard._id !== this.state.deleteCard._id),
+          isConfirmPopupOpen: false,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   handleCardClick = (card) => {
     this.setState({ selectedCard: card });
-  }
+  };
 
   handleAddPlace = (placeName, placeImage) => {
     api.setCard(placeName, placeImage)
-    .then(newCard => {
-      this.setState({ cards: [newCard, ...this.state.cards] });
-      this.closeAllPopups();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+      .then((newCard) => {
+        this.setState({ cards: [newCard, ...this.state.cards] });
+        this.closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   componentDidMount() {
     api.getUserInfo()
-      .then(userData => {
+      .then((userData) => {
         this.setState({ currentUser: userData });
       })
       .catch((err) => {
         console.log(err);
       });
 
-      api.getCards()
-      .then(getCardsArray => {
+    api.getCards()
+      .then((getCardsArray) => {
         this.setState({ cards: getCardsArray });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
 
     this.tokenCheck();
 
-    document.addEventListener("keydown", this.handleEscClick);
-    document.addEventListener("click", this.handleOutsideClick);
+    document.addEventListener('keydown', this.handleEscClick);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleEscClick);
-    document.addEventListener("click", this.handleOutsideClick);
+    document.removeEventListener('keydown', this.handleEscClick);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   closeAllPopups = () => {
@@ -164,22 +169,22 @@ class App extends Component {
       isEditAvatarPopupOpen: false,
       isConfirmPopupOpen: false,
       isInfoTooltipOpen: false,
-      selectedCard: {}
+      selectedCard: {},
     });
-  }
+  };
 
   openConfirmDeletePopup = (card) => {
     this.setState({
       deleteCard: card,
-      isConfirmPopupOpen: true
+      isConfirmPopupOpen: true,
     });
-  }
+  };
 
   resetLoggedIn = () => {
     this.setState({
-      loggedIn: false
-    })
-  }
+      loggedIn: false,
+    });
+  };
 
   tokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
@@ -189,22 +194,22 @@ class App extends Component {
           if (res) {
             this.setState({
               loggedIn: true,
-              userEmail: res.data.email
+              userEmail: res.data.email,
             }, () => {
-              this.props.history.push("/main");
+              this.props.history.push('/main');
             });
           }
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
     }
-  }
+  };
 
   handleRegisterSubmit = (userEmail, userPassword) => {
     Auth.register(userEmail, userPassword)
       .then((res) => {
-        if(res) {
+        if (res) {
           this.openTooltipSuccess(userEmail);
         } else {
           this.openTooltipFail();
@@ -213,7 +218,7 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   handleLoginSubmit = (userEmail, userPassword) => {
     Auth.authorize(userEmail, userPassword)
@@ -222,9 +227,9 @@ class App extends Component {
           localStorage.setItem('jwt', data.token);
           this.setState({
             loggedIn: true,
-            userEmail: userEmail
+            userEmail: userEmail,
           });
-          this.props.history.push("/main");
+          this.props.history.push('/main');
         } else {
           this.openTooltipFail();
         }
@@ -232,7 +237,7 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   openTooltipSuccess = (userEmail) => {
     this.setState({
@@ -241,25 +246,25 @@ class App extends Component {
       userEmail: userEmail,
       isInfoTooltipOpen: true,
       infoTooltipButtonName: 'success',
-      infoTooltipMessage: 'Вы успешно зарегистрировались!'
+      infoTooltipMessage: 'Вы успешно зарегистрировались!',
     });
-  }
+  };
 
   openTooltipFail = () => {
     this.setState({
       isSuccess: false,
       isInfoTooltipOpen: true,
       infoTooltipButtonName: 'fail',
-      infoTooltipMessage: 'Что-то пошло не так! Попробуйте ещё раз.'
+      infoTooltipMessage: 'Что-то пошло не так! Попробуйте ещё раз.',
     });
-  }
+  };
 
   handleConfirmRegister = () => {
     this.closeAllPopups();
-    if(this.state.isSuccess) {
-      this.props.history.push("/main");
-    } 
-  }
+    if (this.state.isSuccess) {
+      this.props.history.push('/main');
+    }
+  };
 
   render() {
     return (
@@ -300,7 +305,7 @@ class App extends Component {
             </Switch>
 
             {this.state.loggedIn && <Footer />}
-            
+
             <EditProfilePopup
               isOpen={this.state.isEditProfilePopupOpen}
               onUpdateUser={this.handleUpdateUser}
@@ -336,14 +341,13 @@ class App extends Component {
               buttonName={this.state.infoTooltipButtonName}
               onConfirm={this.handleConfirmRegister}
             />
-            
+
           </CurrentUserContext.Provider>
-          
+
         </div>
       </div>
     );
-  } 
+  }
 }
 
 export default withRouter(App);
-

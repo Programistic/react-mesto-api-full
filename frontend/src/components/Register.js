@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-function Register({handleRegisterSubmit}) {
-
+function Register({ handleRegisterSubmit }) {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
@@ -12,15 +11,15 @@ function Register({handleRegisterSubmit}) {
       return;
     }
     handleRegisterSubmit(userEmail, userPassword);
-  } 
+  };
 
   const handleEmailChange = (event) => {
     setUserEmail(event.target.value);
-  }
+  };
 
   const handlePasswordChange = (event) => {
     setUserPassword(event.target.value);
-  }
+  };
 
   return (
     <div className="entry-screen">

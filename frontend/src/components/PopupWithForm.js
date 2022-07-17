@@ -1,5 +1,12 @@
-function PopupWithForm({isOpen, name, title, buttonText, onSubmit, children, onClose}) {
-
+function PopupWithForm({
+  isOpen,
+  name,
+  title,
+  buttonText,
+  onSubmit,
+  children,
+  onClose,
+}) {
   const popupOpened = isOpen ? 'popup_opened' : '';
 
   return (
