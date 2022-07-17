@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
@@ -13,11 +14,11 @@ const auth = require('./middlewares/auth');
 
 const FoundError = require('./errors/FoundError');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_CONN } = process.env;
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
