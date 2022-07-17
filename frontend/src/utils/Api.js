@@ -1,19 +1,14 @@
-const cohortID = 'cohort-39';
-
-const token = 'fed91f6d-1f71-4682-bc63-ccd602fc60c4';
-
-const baseURL = 'https://mesto.nomoreparties.co/v1/';
-const cardURL = `${baseURL}${cohortID}/cards`;
-const userURL = `${baseURL}${cohortID}/users/me`;
-const avatarURL = `${baseURL}${cohortID}/users/me/avatar`;
+const baseURL = `${window.location.protocol}//backend.mesto.students.nomoredomains.xyz`;
+const cardURL = `${baseURL}/cards`;
+const userURL = `${baseURL}/users/me`;
+const avatarURL = `${baseURL}/users/me/avatar`;
 
 class Api {
-  constructor(userURL, cardURL, avatarURL, token) {
+  constructor(userURL, cardURL, avatarURL) {
     this._userURL = userURL;
     this._cardURL = cardURL;
     this._avatarURL = avatarURL;
-    this._token = token;
-    this._headers = { authorization: this._token, 'Content-Type': 'application/json' };
+    this._headers = { 'Content-Type': 'application/json', };
   }
 
   getUserInfo() {
