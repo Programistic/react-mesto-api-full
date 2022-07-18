@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
@@ -26,17 +26,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-const corsOptions = {
-  origin: [
-    'localhost:3000',
-    'https://frontend.mesto.students.nomoredomains.xyz',
-    'http://frontend.mesto.students.nomoredomains.xyz',
-  ],
-  credentials: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-};
-
-app.use(cors(corsOptions));
+app.use(cors);
 
 app.use(requestLogger);
 
