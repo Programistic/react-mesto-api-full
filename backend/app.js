@@ -19,6 +19,9 @@ const { PORT = 3000, DB_CONN } = process.env;
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
@@ -29,8 +32,6 @@ app.use(requestLogger);
 
 app.use(helmet());
 app.use(limiter);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
