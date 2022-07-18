@@ -1,5 +1,5 @@
-const allowedCors = require('../utils/constants');
-const defaultAllowedMethods = require('../utils/constants');
+const { allowedCors } = require('../utils/constants');
+const { defaultAllowedMethods } = require('../utils/constants');
 
 module.exports = (req, res, next) => {
   const { origin } = req.headers;
