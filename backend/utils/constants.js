@@ -13,9 +13,21 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
+const allowedCors = [
+  'https://praktikum.tk',
+  'http://praktikum.tk',
+  'https://frontend.mesto.students.nomoredomains.xyz',
+  'http://frontend.mesto.students.nomoredomains.xyz',
+  'localhost:3000',
+];
+
+const defaultAllowedMethods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+
 module.exports = {
   URLPattern,
   limiter,
   requestLogFilename,
   errorLogFilename,
+  allowedCors,
+  defaultAllowedMethods,
 };

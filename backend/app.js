@@ -3,6 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
@@ -21,6 +22,8 @@ const app = express();
 mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
+
+app.use(cors);
 
 app.use(requestLogger);
 
