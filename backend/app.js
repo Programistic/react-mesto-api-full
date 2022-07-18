@@ -28,24 +28,15 @@ mongoose.connect(DB_CONN, {
 
 const corsOptions = {
   origin: [
-    'https://praktikum.tk',
-    'http://praktikum.tk',
-    'https://frontend.mesto.students.nomoredomains.xyz',
-    'https://frontend.mesto.students.nomoredomains.xyz/signin',
-    'https://frontend.mesto.students.nomoredomains.xyz/signup',
-    'https://frontend.mesto.students.nomoredomains.xyz/users/me',
-    'https://frontend.mesto.students.nomoredomains.xyz/cards',
-    'http://frontend.mesto.students.nomoredomains.xyz',
-    'http://frontend.mesto.students.nomoredomains.xyz/signin',
-    'http://frontend.mesto.students.nomoredomains.xyz/signup',
-    'http://frontend.mesto.students.nomoredomains.xyz/users/me',
-    'http://frontend.mesto.students.nomoredomains.xyz/cards',
     'localhost:3000',
+    'https://frontend.mesto.students.nomoredomains.xyz',
+    'http://frontend.mesto.students.nomoredomains.xyz',
   ],
   credentials: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
-app.use('*', cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(requestLogger);
 
