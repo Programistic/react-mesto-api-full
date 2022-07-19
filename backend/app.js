@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('./middlewares/cors');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
@@ -15,7 +15,7 @@ const auth = require('./middlewares/auth');
 
 const FoundError = require('./errors/FoundError');
 
-const { PORT = 3001, DB_CONN } = process.env;
+const { PORT = 3000, DB_CONN } = process.env;
 
 const app = express();
 
@@ -26,7 +26,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-app.use(cors);
+app.use(cors());
 
 app.use(requestLogger);
 
