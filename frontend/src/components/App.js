@@ -221,7 +221,6 @@ class App extends Component {
     Auth.authorize(userEmail, userPassword)
       .then((data) => {
         if (data !== undefined && data.token) {
-          localStorage.setItem('jwt', data.token);
           this.setState({
             loggedIn: true,
             userEmail: userEmail,
