@@ -1,7 +1,7 @@
 export const BASE_URL = `${window.location.protocol}//backend.mesto.students.nomoredomains.xyz`;
 
 export const register = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch('http://backend.mesto.students.nomoredomains.xyz/signin', {
     method: 'POST',
     headers: {
       'Accept': 'application/json; charset=utf-8',
@@ -13,7 +13,7 @@ export const register = (email, password) => {
 };
 
 export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch('http://backend.mesto.students.nomoredomains.xyz/signup', {
     method: 'POST',
     headers: {
       'Accept': 'application/json; charset=utf-8',
