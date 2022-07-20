@@ -15,7 +15,7 @@ const auth = require('./middlewares/auth');
 
 const FoundError = require('./errors/FoundError');
 
-const { PORT=3000, DB_CONN } = process.env;
+const { DB_CONN } = process.env;
 
 const app = express();
 
