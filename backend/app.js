@@ -14,6 +14,7 @@ const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 
 const FoundError = require('./errors/FoundError');
+const PORT = 3000;
 
 const { DB_CONN } = process.env;
 
