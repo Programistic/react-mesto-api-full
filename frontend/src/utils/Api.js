@@ -4,11 +4,12 @@ const userURL = `${baseURL}/users/me`;
 const avatarURL = `${baseURL}/users/me/avatar`;
 
 class Api {
-  constructor(userURL, cardURL, avatarURL) {
+  constructor(userURL, cardURL, avatarURL, token) {
     this._userURL = userURL;
     this._cardURL = cardURL;
     this._avatarURL = avatarURL;
-    this._headers = { 'Content-Type': 'application/json', };
+    this._token = token;
+    this._headers = { authorization: this._token, 'Content-Type': 'application/json' }
   }
 
   getUserInfo() {

@@ -187,20 +187,23 @@ class App extends Component {
   };
 
   tokenCheck = () => {
-    Auth.getContent()
-      .then((res) => {
-        if (res) {
-          this.setState({
-            loggedIn: true,
-            userEmail: res.data.email,
-          }, () => {
-            this.props.history.push('/main');
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      Auth.getContent(jwt)
+        .then((res) => {
+          if (res) {
+            this.setState({
+              loggedIn: true,
+              userEmail: res.data.email
+            }, () => {
+              this.props.history.push("/main");
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
   };
 
   handleRegisterSubmit = (userEmail, userPassword) => {
@@ -221,6 +224,7 @@ class App extends Component {
     Auth.authorize(userEmail, userPassword)
       .then((data) => {
         if (data !== undefined && data.token) {
+          localStorage.setItem('jwt', data.token);
           this.setState({
             loggedIn: true,
             userEmail: userEmail,
