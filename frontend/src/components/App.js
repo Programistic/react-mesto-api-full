@@ -187,22 +187,24 @@ class App extends Component {
   };
 
   tokenCheck = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      Auth.getContent(jwt)
-        .then((res) => {
-          if (res) {
-            this.setState({
-              loggedIn: true,
-              userEmail: res.data.email
-            }, () => {
-              this.props.history.push("/main");
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        Auth.getContent(jwt)
+          .then((res) => {
+            if (res) {
+              this.setState({
+                loggedIn: true,
+                userEmail: res.data.email
+              }, () => {
+                this.props.history.push("/main");
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
     }
   };
 
