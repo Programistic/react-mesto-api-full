@@ -4,12 +4,11 @@ const userURL = `${baseURL}/users/me`;
 const avatarURL = `${baseURL}/users/me/avatar`;
 
 class Api {
-  constructor(userURL, cardURL, avatarURL, token) {
+  constructor(userURL, cardURL, avatarURL) {
     this._userURL = userURL;
     this._cardURL = cardURL;
     this._avatarURL = avatarURL;
-    this._token = token;
-    this._headers = { authorization: this._token, 'Content-Type': 'application/json' }
+    this._headers = { authorization: `Bearer ${localStorage.getItem('jwt')}`, 'Content-Type': 'application/json' }
   }
 
   getUserInfo() {
@@ -90,6 +89,6 @@ class Api {
   }
 }
 
-const api = new Api(userURL, cardURL, avatarURL, token);
+const api = new Api(userURL, cardURL, avatarURL);
 
 export default api;
