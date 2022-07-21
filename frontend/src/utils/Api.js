@@ -90,6 +90,6 @@ class Api {
   }
 }
 
-const api = new Api(userURL, cardURL, avatarURL);
+const api = new Api(userURL, cardURL, avatarURL, token);
 
 export default api;
