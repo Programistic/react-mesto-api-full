@@ -8,7 +8,7 @@ const handleCardFound = (card, res) => {
   if (!card) {
     throw new FoundError('Карточка не найдена!');
   } else {
-    res.send(card);
+    res.send({ card });
   }
 };
 
@@ -28,8 +28,7 @@ const handleUserFound = (user, res) => {
   if (!user) {
     throw new FoundError('Пользователь не найден!');
   } else {
-    console.log('user=' + user);
-    res.send(user);
+    res.send({ user });
   }
 };
 

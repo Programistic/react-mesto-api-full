@@ -192,8 +192,8 @@ class App extends Component {
       if (jwt) {
         Auth.getContent(jwt)
           .then((res) => {
-            console.log('res =' + res);
-            console.log('jwt =' + jwt)
+            console.log('getContent: res = ' + res);
+            console.log('getContent: jwt = ' + jwt)
             if (res) {
               this.setState({
                 loggedIn: true,

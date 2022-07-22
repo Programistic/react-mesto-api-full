@@ -10,8 +10,8 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose }) {
   const [textOnSubmit, setTextOnSubmit] = useState('');
 
   useEffect(() => {
-    setUserName(currentUser.name);
-    setUserDescription(currentUser.about);
+    //setUserName(currentUser.name);
+    //setUserDescription(currentUser.about);
     setTextOnSubmit('Сохранить');
   }, [currentUser, isOpen]);
 

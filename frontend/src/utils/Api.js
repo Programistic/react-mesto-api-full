@@ -15,14 +15,20 @@ class Api {
     return fetch(this._userURL, {
       headers: this._headers,
     })
-      .then(res => this._getResponseData(res));
+    .then((res) => {
+      console.log('getUserInfo: res =' + res)
+      this._getResponseData(res)
+    })
   }
 
   getCards() {
     return fetch(this._cardURL, {
       headers: this._headers,
     })
-      .then(res => this._getResponseData(res));
+      .then((res) => {
+        console.log('getCards: res =' + res)
+        this._getResponseData(res)
+      })
   }
 
   setUserInfo(userName, userDescription) {
@@ -34,7 +40,10 @@ class Api {
         about: userDescription,
       }),
     })
-      .then(res => this._getResponseData(res));
+    .then((res) => {
+      console.log('setUserInfo: res =' + res)
+      this._getResponseData(res)
+    })
   }
 
   setAvatar(avatarData) {
