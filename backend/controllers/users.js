@@ -4,7 +4,7 @@ const User = require('../models/user');
 const { handleUserFound, handleError, handleConflictError } = require('../errors/errors');
 const AuthError = require('../errors/AuthError');
 
-const { JWT_KEY = 'SECRET' } = process.env;
+const { JWT_KEY } = process.env;
 
 const getAllUsers = (req, res, next) => {
   User.find({})
