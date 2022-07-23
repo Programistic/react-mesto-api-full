@@ -15,10 +15,9 @@ class Api {
     return fetch(this._userURL, {
       headers: this._headers,
     })
-    .then((res) => {
-      console.log('getUserInfo: res =' + res)
-      this._getResponseData(res)
-    })
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
   getCards() {
@@ -26,8 +25,7 @@ class Api {
       headers: this._headers,
     })
       .then((res) => {
-        console.log('getCards: res =' + res)
-        this._getResponseData(res)
+        return this._getResponseData(res)
       })
   }
 
@@ -40,10 +38,9 @@ class Api {
         about: userDescription,
       }),
     })
-    .then((res) => {
-      console.log('setUserInfo: res =' + res)
-      this._getResponseData(res)
-    })
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
   setAvatar(avatarData) {
@@ -54,7 +51,9 @@ class Api {
         avatar: avatarData,
       }),
     })
-      .then(res => this._getResponseData(res));
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
   setCard(placeName, placeImage) {
@@ -66,7 +65,9 @@ class Api {
         link: placeImage,
       }),
     })
-      .then(res => this._getResponseData(res));
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
   deleteCard(cardID) {
@@ -74,7 +75,9 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then(res => this._getResponseData(res));
+      .then((res) => {
+        return this._getResponseData(res)
+      })
   }
 
   changeLikeCardStatus(cardID, isLiked) {
@@ -83,13 +86,17 @@ class Api {
         method: 'PUT',
         headers: this._headers,
       })
-        .then(res => this._getResponseData(res));
+        .then((res) => {
+          return this._getResponseData(res)
+        })
     } else {
         return fetch(this._cardURL + `/${cardID}/likes`, {
           method: 'DELETE',
           headers: this._headers,
         })
-          .then(res => this._getResponseData(res));
+          .then((res) => {
+            return this._getResponseData(res)
+          })
       }
   }
 

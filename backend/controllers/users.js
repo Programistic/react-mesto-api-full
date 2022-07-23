@@ -49,7 +49,6 @@ const getCurrentUser = (req, res, next) => {
   const { _id } = req.user;
   User.findById(_id)
     .then((user) => {
-      console.log('back-user =' + user);
       handleUserFound(user, res);
     })
     .catch(next);

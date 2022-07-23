@@ -75,8 +75,8 @@ class App extends Component {
 
   handleUpdateUser = (userName, userDescription) => {
     api.setUserInfo(userName, userDescription)
-      .then((userData) => {
-        this.setState({ currentUser: userData });
+      .then((res) => {
+        this.setState({ currentUser: res.user });
         this.closeAllPopups();
       })
       .catch((err) => {
@@ -86,8 +86,8 @@ class App extends Component {
 
   handleUpdateAvatar = (userAvatar) => {
     api.setAvatar(userAvatar)
-      .then((userData) => {
-        this.setState({ currentUser: userData });
+      .then((res) => {
+        this.setState({ currentUser: res.user });
         this.closeAllPopups();
       })
       .catch((err) => {
@@ -96,10 +96,10 @@ class App extends Component {
   };
 
   handleCardLike = (card) => {
-    const isLiked = card.likes.some((like) => like._id === this.state.currentUser._id);
+    const isLiked = card.likes.some((like) =>  like === this.state.currentUser._id);
     api.changeLikeCardStatus(card._id, isLiked)
-      .then((getCard) => {
-        this.setState({ cards: this.state.cards.map((oldCard) => oldCard._id === getCard._id ? getCard : oldCard) });
+      .then((res) => {
+        this.setState({ cards: this.state.cards.map((oldCard) => oldCard._id === res.card._id ? res.card : oldCard) });
       })
       .catch((err) => {
         console.log(err);
@@ -125,8 +125,8 @@ class App extends Component {
 
   handleAddPlace = (placeName, placeImage) => {
     api.setCard(placeName, placeImage)
-      .then((newCard) => {
-        this.setState({ cards: [newCard, ...this.state.cards] });
+      .then((res) => {
+        this.setState({ cards: [res.card, ...this.state.cards] });
         this.closeAllPopups();
       })
       .catch((err) => {
@@ -136,16 +136,16 @@ class App extends Component {
 
   componentDidMount() {
     api.getUserInfo()
-      .then((userData) => {
-        this.setState({ currentUser: userData });
+      .then((res) => {
+        this.setState({ currentUser: res.user });
       })
       .catch((err) => {
         console.log(err);
       });
 
     api.getCards()
-      .then((getCardsArray) => {
-        this.setState({ cards: getCardsArray });
+      .then((res) => {
+        this.setState({ cards: res.card });
       })
       .catch((err) => {
         console.log(err);
@@ -190,14 +190,13 @@ class App extends Component {
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
       if (jwt) {
-        Auth.getContent(jwt)
+        Auth
+          .getContent(jwt)
           .then((res) => {
-            console.log('getContent: res = ' + res);
-            console.log('getContent: jwt = ' + jwt)
             if (res) {
               this.setState({
                 loggedIn: true,
-                userEmail: res.data.email
+                userEmail: res.user.email
               }, () => {
                 this.props.history.push("/main");
               });

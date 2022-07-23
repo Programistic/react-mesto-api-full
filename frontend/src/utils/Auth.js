@@ -8,10 +8,9 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-  .then((res) => {
-    console.log('register res = '+ res)
-    getResponseData(res);
-  })
+    .then((res) => {
+      return getResponseData(res);
+    })
 };
 
 export const authorize = (email, password) => {
@@ -22,9 +21,9 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-  .then((res) => {
-    getResponseData(res);
-  })
+    .then((res) => {
+      return getResponseData(res);
+    })
 };
 
 export const getContent = (token) => {
@@ -35,9 +34,9 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     },
   })
-  .then((res) => {
-    res.json();
-  })
+    .then((res) => {
+      return getResponseData(res);
+    })
 };
 
 export const getResponseData = (res) => {

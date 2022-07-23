@@ -21,10 +21,10 @@ function Card({
     onCardDelete(card);
   };
 
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
   const cardDeleteButtonClassName = (isOwn ? 'card__button-delete' : 'card__button-delete_inactive');
 
-  const isLiked = card.likes.some((like) => like._id === currentUser._id);
+  const isLiked = card.likes.some((like) => like === currentUser._id);
   const cardLikeSetClassName = (isLiked ? 'card__like_liked' : '');
 
   return (
