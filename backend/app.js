@@ -16,7 +16,9 @@ const FoundError = require('./errors/FoundError');
 const { handleUnknownError } = require('./errors/errors');
 const options = require('./utils/constants');
 
-const { DB_CONN, PORT } = process.env;
+const PORT = 3000;
+
+const { DB_CONN } = process.env;
 
 const app = express();
 
