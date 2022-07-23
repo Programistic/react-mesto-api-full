@@ -18,7 +18,13 @@ const { DB_CONN, PORT } = process.env;
 
 const app = express();
 
-app.use('*', cors);
+app.use(function(req, res, next) {
+  const { origin } = req.headers;
+  console.log('origin = ' + origin);
+
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
