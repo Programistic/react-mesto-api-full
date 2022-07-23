@@ -17,8 +17,7 @@ const { handleUnknownError } = require('./errors/errors');
 const options = require('./utils/constants');
 
 const PORT = 3000;
-
-const { DB_CONN } = process.env;
+const DB_CONN = 'mongodb://localhost:27017/mestodb';
 
 const app = express();
 
