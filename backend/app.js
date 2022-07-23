@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('./middlewares/cors');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
@@ -13,11 +13,11 @@ const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
+const options = require('./utils/constants');
 
 const { DB_CONN, PORT } = process.env;
 
 const app = express();
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,13 +26,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-app.use(function(req, res, next) {
-  const { origin } = req.headers;
-  console.log('origin = ' + origin);
-
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+app.use(cors(options));
 
 app.use(requestLogger);
 
