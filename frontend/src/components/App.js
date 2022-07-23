@@ -135,6 +135,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.tokenCheck();
+
     api.getUserInfo()
       .then((res) => {
         this.setState({ currentUser: res.user });
@@ -150,8 +152,6 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
-
-    this.tokenCheck();
 
     document.addEventListener('keydown', this.handleEscClick);
     document.addEventListener('click', this.handleOutsideClick);
@@ -198,7 +198,7 @@ class App extends Component {
                 loggedIn: true,
                 userEmail: res.user.email
               }, () => {
-                this.props.history.push("/main");
+                this.props.history.push("/signin");
               });
             }
           })
