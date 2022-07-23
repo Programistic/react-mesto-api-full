@@ -13,6 +13,7 @@ const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
+const ServerError = require('./errors/ServerError');
 const options = require('./utils/constants');
 
 const { DB_CONN, PORT } = process.env;
@@ -55,9 +56,9 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  res.status(err.statusCode).send({ message: err.message });
-  next();
+app.use((req, res, next) => {
+  Promise.reject(new ServerError('Неизвестная ошибка сервера!'))
+    .catch(next);
 });
 
 app.listen(PORT);
