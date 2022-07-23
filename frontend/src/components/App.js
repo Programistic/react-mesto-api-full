@@ -198,7 +198,7 @@ class App extends Component {
                 loggedIn: true,
                 userEmail: res.user.email
               }, () => {
-                this.props.history.push("/signin");
+                this.props.history.push("/main");
               });
             }
           })
@@ -265,7 +265,7 @@ class App extends Component {
   handleConfirmRegister = () => {
     this.closeAllPopups();
     if (this.state.isSuccess) {
-      this.props.history.push('/main');
+      this.props.history.push('/signin');
     }
   };
 
