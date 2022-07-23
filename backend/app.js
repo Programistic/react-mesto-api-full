@@ -12,11 +12,9 @@ const cardsRouter = require('./routes/cards');
 const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
-
 const FoundError = require('./errors/FoundError');
-const PORT = 3000;
 
-const { DB_CONN } = process.env;
+const { DB_CONN, PORT } = process.env;
 
 const app = express();
 
