@@ -3,25 +3,21 @@ const { handleAuthError } = require('../errors/errors');
 
 const { JWT_KEY, NODE_ENV } = process.env;
 
-const extractBearerToken = (header) => header.replace('Bearer ', '');
-
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    handleAuthError();
-    return;
+    return handleAuthError();
   }
 
-  const token = extractBearerToken(authorization);
+  const token = authorization.replace('Bearer ', '');;
 
   let payload;
 
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_KEY : '123');
   } catch (err) {
-    handleAuthError();
-    return;
+    return handleAuthError();
   }
 
   req.user = payload;
