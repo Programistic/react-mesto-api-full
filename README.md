@@ -1,5 +1,6 @@
 # Фронтенд и бэкенд части проекта "Место"
 
+### http://frontend.mesto.students.nomoredomains.xyz
 ### https://frontend.mesto.students.nomoredomains.xyz
 ### IP: 51.250.106.136
 
