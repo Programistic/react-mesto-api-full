@@ -13,11 +13,11 @@ const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
-const { handleUnknownError } = require('./errors/errors');
 const options = require('./utils/constants');
 
-const PORT = 3000;
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
+
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -57,6 +57,10 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use(handleUnknownError);
+app.use((err, req, res) => {
+  if (!err.status) {
+    res.status(500).send({ message: 'Неизвестная ошибка сервера!' });
+  }
+});
 
 app.listen(PORT);

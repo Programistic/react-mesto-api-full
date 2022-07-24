@@ -3,7 +3,6 @@ const AuthError = require('./AuthError');
 const RequestError = require('./RequestError');
 const ConflictError = require('./ConflictError');
 const UnauthRequestError = require('./UnauthRequestError');
-const ServerError = require('./ServerError');
 
 const handleCardFound = (card, res) => {
   if (!card) {
@@ -47,10 +46,6 @@ const handleAuthError = () => {
   throw new AuthError('Необходима авторизация!');
 };
 
-const handleUnknownError = () => {
-  throw new ServerError('Неизвестная ошибка сервера!');
-};
-
 const handleError = (err, next) => {
   if (err.name === 'ValidationError' || err.name === 'CastError') {
     throw new RequestError('Переданы некорректные данные!');
@@ -65,7 +60,6 @@ module.exports = {
   handleCheckCardOwner,
   handleUserFound,
   handleAuthError,
-  handleUnknownError,
   handleConflictError,
   handleError,
 };
