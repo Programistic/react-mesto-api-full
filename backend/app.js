@@ -57,10 +57,11 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   if (!err.status) {
     res.status(500).send({ message: 'Неизвестная ошибка сервера!' });
   }
+  next();
 });
 
 app.listen(PORT);
