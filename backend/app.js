@@ -58,7 +58,7 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use((err, req, res, next) => {
-  if (!err.status) {
+  if (!err.statusCode) {
     res.status(500).send({ message: 'Неизвестная ошибка сервера!' });
   }
   next();
