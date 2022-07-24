@@ -136,7 +136,7 @@ class App extends Component {
 
   componentDidMount() {
     this.tokenCheck();
-  
+
     api.getUserInfo()
       .then((res) => {
         this.setState({ currentUser: res.user });

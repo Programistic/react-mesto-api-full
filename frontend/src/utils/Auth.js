@@ -37,6 +37,10 @@ export const getContent = (token) => {
     .then((res) => {
       return getResponseData(res);
     })
+    .catch((res) => {
+      console.log('Необходима авторизация!')
+      return res = false;
+    })
 };
 
 export const getResponseData = (res) => {
