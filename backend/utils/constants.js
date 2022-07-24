@@ -20,8 +20,6 @@ const options = {
     'http://praktikum.tk',
     'https://frontend.mesto.students.nomoredomains.xyz',
     'http://frontend.mesto.students.nomoredomains.xyz',
-    'https://backend.mesto.students.nomoredomains.xyz',
-    'http://backend.mesto.students.nomoredomains.xyz',
   ],
   credentials: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

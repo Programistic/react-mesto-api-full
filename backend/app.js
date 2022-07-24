@@ -6,14 +6,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { limiter } = require('./utils/constants');
+const { limiter, options } = require('./utils/constants');
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
-const options = require('./utils/constants');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
 
@@ -28,7 +27,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-app.use('*', cors(options));
+app.use(cors(options));
 
 app.use(requestLogger);
 
