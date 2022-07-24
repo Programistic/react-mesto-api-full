@@ -28,7 +28,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-app.use(cors(options));
+app.use('*', cors(options));
 
 app.use(requestLogger);
 
