@@ -31,7 +31,7 @@ app.use('*', cors());
 
 app.use(requestLogger);
 
-app.use(helmet());
+//app.use(helmet());
 app.use(limiter);
 
 app.get('/crash-test', () => {
