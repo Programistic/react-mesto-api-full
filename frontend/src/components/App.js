@@ -134,9 +134,7 @@ class App extends Component {
       });
   };
 
-  componentDidMount() {
-    this.tokenCheck();
-
+  getUserAndCards = () => {
     api.getUserInfo()
       .then((res) => {
         this.setState({ currentUser: res.user });
@@ -152,6 +150,10 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  componentDidMount() {
+    this.tokenCheck();
 
     document.addEventListener('keydown', this.handleEscClick);
     document.addEventListener('click', this.handleOutsideClick);
@@ -193,11 +195,16 @@ class App extends Component {
         Auth
           .getContent(jwt)
           .then((res) => {
+            console.log('res = ' + res)
+            console.log('res.user.email = ' + res.user.email)
+            console.log('res.headers = ' + res.headers)
             if (res) {
               this.setState({
                 loggedIn: true,
                 userEmail: res.user.email
-              }, () => {
+              },
+              this.getUserAndCards(),
+              () => {
                 this.props.history.push("/main");
               });
             }
@@ -226,13 +233,19 @@ class App extends Component {
   handleLoginSubmit = (userEmail, userPassword) => {
     Auth.authorize(userEmail, userPassword)
       .then((data) => {
+        console.log('data = ' + data)
+        console.log('data.token = ' + data.token)
+        console.log('data.headers = ' + data.headers)
         if (data !== undefined && data.token) {
           localStorage.setItem('jwt', data.token);
           this.setState({
             loggedIn: true,
             userEmail: userEmail,
-          });
-          this.props.history.push('/main');
+          }),
+          this.getUserAndCards(),
+          () => {
+            this.props.history.push("/main");
+          };
         } else {
           this.openTooltipFail();
         }

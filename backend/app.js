@@ -27,6 +27,7 @@ const options = {
     'http://frontend.mesto.students.nomoredomains.xyz',
   ],
   credentials: true,
+  exposedHeaders: '*',
 };
 
 app.use('*', cors(options));
