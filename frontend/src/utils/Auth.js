@@ -22,6 +22,7 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
     .then((res) => {
+      console.log('authorise.res = ' + res)
       return getResponseData(res);
     })
 };

@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { limiter } = require('./utils/constants');
+// const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const signup = require('./routes/signup');
@@ -41,8 +41,8 @@ mongoose.connect(DB_CONN, {
 
 app.use(requestLogger);
 
-app.use(helmet());
-app.use(limiter);
+// app.use(helmet());
+// app.use(limiter);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -53,8 +53,10 @@ app.get('/crash-test', () => {
 app.use(signup);
 app.use(signin);
 
-app.use('/users', auth, userRouter);
-app.use('/cards', auth, cardsRouter);
+app.use(auth);
+
+app.use('/users', userRouter);
+app.use('/cards', cardsRouter);
 
 app.use((req, res, next) => {
   Promise.reject(new FoundError('Ресурс не найден!'))

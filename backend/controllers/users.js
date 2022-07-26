@@ -82,12 +82,14 @@ const getUserByIdAndUpdateAvatar = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-
-  User.findOne({ email }).select('+password') //  идентификация по почте
+  User.findOne(email).select('+password') //  идентификация по почте
     .then((user) => {
+      console.log(user);
       if (!user) {
         throw new AuthError('Неправильная почта или пароль!');
       }
+      console.log(password);
+      console.log(user.password);
       bcrypt.compare(password, user.password) //  аутентификация
         .then((matched) => {
           if (!matched) {

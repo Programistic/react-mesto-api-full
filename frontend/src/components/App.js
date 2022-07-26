@@ -138,6 +138,7 @@ class App extends Component {
     api.getUserInfo()
       .then((res) => {
         this.setState({ currentUser: res.user });
+        console.log('res.user = ' + res.user)
       })
       .catch((err) => {
         console.log(err);
@@ -146,10 +147,13 @@ class App extends Component {
     api.getCards()
       .then((res) => {
         this.setState({ cards: res.card });
+        console.log('res.card = ' + res.card)
       })
       .catch((err) => {
         console.log(err);
       });
+
+    console.log('gerUserCard is ok');
   }
 
   componentDidMount() {
@@ -201,12 +205,11 @@ class App extends Component {
             if (res) {
               this.setState({
                 loggedIn: true,
-                userEmail: res.user.email
-              },
-              this.getUserAndCards(),
-              () => {
-                this.props.history.push("/main");
+                userEmail: res.user.email,
               });
+              this.getUserAndCards();
+              console.log('111')
+              this.props.history.push("/main");
             }
           })
           .catch((err) => {
@@ -241,11 +244,10 @@ class App extends Component {
           this.setState({
             loggedIn: true,
             userEmail: userEmail,
-          }),
-          this.getUserAndCards(),
-          () => {
-            this.props.history.push("/main");
-          };
+          });
+          this.getUserAndCards();
+          console.log('222');
+          this.props.history.push("/main");
         } else {
           this.openTooltipFail();
         }
