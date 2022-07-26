@@ -113,6 +113,9 @@ const login = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { userEmail, userPassword } = req.body;
+  console.log(userEmail);
+  console.log(userPassword);
+  console.log(req.body);
   User.findUserByCredentials(userEmail, userPassword)
     .then((user) => {
       console.log(user);
