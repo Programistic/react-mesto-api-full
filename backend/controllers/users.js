@@ -123,7 +123,7 @@ const login = (req, res, next) => {
           NODE_ENV === 'production' ? JWT_KEY : '123',
           { expiresIn: '7d' },
         );
-        res.send({ token });
+        res.send(token);
       }
     })
     .catch(next);
