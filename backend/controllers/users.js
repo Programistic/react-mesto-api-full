@@ -113,21 +113,18 @@ const login = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { userEmail, userPassword } = req.body;
-  console.log(userEmail);
-  console.log(userPassword);
-  console.log(req.body);
   User.findUserByCredentials(userEmail, userPassword)
     .then((user) => {
-      console.log(user);
       if (!user) {
         throw new AuthError('Неправильная почта или пароль!');
+      } else {
+        const token = jwt.sign(
+          { _id: user._id },
+          NODE_ENV === 'production' ? JWT_KEY : '123',
+          { expiresIn: '7d' },
+        );
+        res.send({ token });
       }
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_KEY : '123',
-        { expiresIn: '7d' },
-      );
-      res.send({ token });
     })
     .catch(next);
 };
