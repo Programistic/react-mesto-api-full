@@ -82,6 +82,9 @@ const getUserByIdAndUpdateAvatar = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
+  console.log(req.body.email);
+  console.log(req.body.password);
+  console.log(email);
   User.findOne(email).select('+password') //  идентификация по почте
     .then((user) => {
       console.log(user);
