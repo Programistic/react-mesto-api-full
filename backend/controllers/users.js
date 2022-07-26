@@ -112,8 +112,8 @@ const login = (req, res, next) => {
 */
 
 const login = (req, res, next) => {
-  const { email, password } = req.body;
-  User.findUserByCredentials(email, password)
+  const { userEmail, userPassword } = req.body;
+  User.findUserByCredentials(userEmail, userPassword)
     .then((user) => {
       if (!user) {
         throw new AuthError('Неправильная почта или пароль!');
@@ -123,8 +123,9 @@ const login = (req, res, next) => {
           NODE_ENV === 'production' ? JWT_KEY : '123',
           { expiresIn: '7d' },
         );
-        res.send(token);
+        res.send({ token });
       }
+      res.send({ message: 'Неудачная авторизация!' })
     })
     .catch(next);
 };
