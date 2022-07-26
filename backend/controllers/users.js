@@ -4,7 +4,7 @@ const User = require('../models/user');
 const { handleUserFound, handleError, handleConflictError } = require('../errors/errors');
 const AuthError = require('../errors/AuthError');
 
-const { JWT_KEY = '123' } = process.env;
+const { JWT_KEY, NODE_ENV } = process.env;
 
 const getAllUsers = (req, res, next) => {
   User.find({})
@@ -80,6 +80,7 @@ const getUserByIdAndUpdateAvatar = (req, res, next) => {
     .catch(next);
 };
 
+/*
 const login = (req, res, next) => {
   const { email, password } = req.body;
   User.findOne({ email }).select('+password') //  идентификация по почте
@@ -105,6 +106,25 @@ const login = (req, res, next) => {
     })
     .catch(() => {
       throw new AuthError('Ошибка авторизации!');
+    })
+    .catch(next);
+};
+*/
+
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+  User.findUserByCredentials(email, password)
+    .then((user) => {
+      if (!user) {
+        throw new AuthError('Неправильная почта или пароль!');
+      } else {
+        const token = jwt.sign(
+          { _id: user._id },
+          NODE_ENV === 'production' ? JWT_KEY : '123',
+          { expiresIn: '7d' },
+        );
+        res.send({ token });
+      }
     })
     .catch(next);
 };
