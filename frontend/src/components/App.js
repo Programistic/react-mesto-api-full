@@ -135,6 +135,22 @@ class App extends Component {
   };
 
   componentDidMount() {
+    api.getUserInfo()
+      .then((res) => {
+        this.setState({ currentUser: res.user });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    api.getCards()
+      .then((res) => {
+        this.setState({ cards: res.card });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     this.tokenCheck();
 
     document.addEventListener('keydown', this.handleEscClick);
