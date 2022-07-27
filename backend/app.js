@@ -1,12 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { limiter, options } = require('./utils/constants');
+// const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const signup = require('./routes/signup');
@@ -15,6 +15,17 @@ const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
+
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'https://frontend.mesto.students.nomoredomains.xyz',
+    'http://frontend.mesto.students.nomoredomains.xyz',
+    'https://backend.mesto.students.nomoredomains.xyz',
+    'http://backend.mesto.students.nomoredomains.xyz',
+  ],
+  credentials: true,
+};
 
 const { PORT = 3000 } = process.env;
 
@@ -31,8 +42,8 @@ mongoose.connect(DB_CONN, {
 
 app.use(requestLogger);
 
-app.use(helmet());
-app.use(limiter);
+// app.use(helmet());
+// app.use(limiter);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
