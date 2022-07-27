@@ -82,21 +82,29 @@ const getUserByIdAndUpdateAvatar = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email);
+  console.log(password);
   User.findOne({ email }).select('+password') //  идентификация по почте
     .then((user) => {
       if (!user) {
-        throw new AuthError('Неправильная почта или пароль!');
+        console.log('Пользователь не найден');
+        // throw new AuthError('Неправильная почта или пароль!');
       } else {
+        console.log('else');
+        console.log(password);
+        console.log(user.password);
         bcrypt.compare(password, user.password) //  аутентификация
           .then((matched) => {
             if (!matched) {
-              throw new AuthError('Неправильная почта или пароль!');
+              console.log('неправ. почта или пароль');
+              // throw new AuthError('Неправильная почта или пароль!');
             } else {
               const token = jwt.sign(
                 { _id: user._id },
                 NODE_ENV === 'production' ? JWT_KEY : '123',
                 { expiresIn: '7d' },
               );
+              console.log(token);
               res.send({ message: 'Успешная авторизация!', data: token });
             }
           });
