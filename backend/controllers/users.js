@@ -80,7 +80,6 @@ const getUserByIdAndUpdateAvatar = (req, res, next) => {
     .catch(next);
 };
 
-/*
 const login = (req, res, next) => {
   const { email, password } = req.body;
   User.findOne({ email }).select('+password') //  идентификация по почте
@@ -95,10 +94,10 @@ const login = (req, res, next) => {
             } else {
               const token = jwt.sign(
                 { _id: user._id },
-                JWT_KEY,
+                NODE_ENV === 'production' ? JWT_KEY : '123',
                 { expiresIn: '7d' },
               );
-              res.send({ message: 'Успешная авторизация!', token });
+              res.send({ message: 'Успешная авторизация!', data: token });
             }
           });
       }
@@ -109,11 +108,11 @@ const login = (req, res, next) => {
     })
     .catch(next);
 };
-*/
 
+/*
 const login = (req, res, next) => {
   const { userEmail, userPassword } = req.body;
-  User.findUserByCredentials(userEmail, userPassword)
+  User.findUserByCredentials({ userEmail, userPassword })
     .then((user) => {
       if (!user) {
         throw new AuthError('Неправильная почта или пароль!');
@@ -123,11 +122,12 @@ const login = (req, res, next) => {
           NODE_ENV === 'production' ? JWT_KEY : '123',
           { expiresIn: '7d' },
         );
-        res.send({ token });
+        res.send({ data: token });
       }
     })
     .catch(next);
 };
+*/
 
 module.exports = {
   getAllUsers,
