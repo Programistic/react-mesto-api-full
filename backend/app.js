@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { limiter } = require('./utils/constants');
+const { limiter, options } = require('./utils/constants');
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const signup = require('./routes/signup');
@@ -20,7 +20,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use('*', cors());
+app.use('*', cors(options));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,10 +43,8 @@ app.get('/crash-test', () => {
 app.use(signup);
 app.use(signin);
 
-app.use(auth);
-
-app.use('/users', userRouter);
-app.use('/cards', cardsRouter);
+app.use('/users', auth, userRouter);
+app.use('/cards', auth, cardsRouter);
 
 app.use((req, res, next) => {
   Promise.reject(new FoundError('Ресурс не найден!'))

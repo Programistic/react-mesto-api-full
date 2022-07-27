@@ -16,8 +16,6 @@ const limiter = rateLimit({
 const options = {
   origin: [
     'http://localhost:3000',
-    'https://praktikum.tk',
-    'http://praktikum.tk',
     'https://frontend.mesto.students.nomoredomains.xyz',
     'http://frontend.mesto.students.nomoredomains.xyz',
   ],
