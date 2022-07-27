@@ -233,10 +233,8 @@ class App extends Component {
           localStorage.setItem('jwt', data.token);
           this.setState({
             loggedIn: true,
-            userEmail: userEmail,
           });
-          // this.getUserAndCards();
-          this.props.history.push("/main");
+          this.tokenCheck();
         } else {
           this.openTooltipFail();
         }
