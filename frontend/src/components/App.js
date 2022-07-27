@@ -233,6 +233,8 @@ class App extends Component {
   handleLoginSubmit = (userEmail, userPassword) => {
     Auth.authorize(userEmail, userPassword)
       .then((data) => {
+        console.log(data);
+        console.log(token);
         if (data !== undefined && data.token) {
           localStorage.setItem('jwt', data.token);
           this.setState({

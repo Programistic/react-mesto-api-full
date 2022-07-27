@@ -4,7 +4,7 @@ const User = require('../models/user');
 const { handleUserFound, handleError, handleConflictError } = require('../errors/errors');
 const AuthError = require('../errors/AuthError');
 
-const { JWT_KEY, NODE_ENV } = process.env;
+const { JWT_KEY = '123' } = process.env;
 
 const getAllUsers = (req, res, next) => {
   User.find({})
@@ -82,34 +82,24 @@ const getUserByIdAndUpdateAvatar = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email);
-  console.log(password);
+
   User.findOne({ email }).select('+password') //  идентификация по почте
     .then((user) => {
       if (!user) {
-        console.log('Пользователь не найден');
-        // throw new AuthError('Неправильная почта или пароль!');
-      } else {
-        console.log('else');
-        console.log(password);
-        console.log(user.password);
-        bcrypt.compare(password, user.password) //  аутентификация
-          .then((matched) => {
-            if (!matched) {
-              console.log('неправ. почта или пароль');
-              // throw new AuthError('Неправильная почта или пароль!');
-            } else {
-              const token = jwt.sign(
-                { _id: user._id },
-                NODE_ENV === 'production' ? JWT_KEY : '123',
-                { expiresIn: '7d' },
-              );
-              console.log(token);
-              res.send({ message: 'Успешная авторизация!', data: token });
-            }
-          });
+        throw new AuthError('Неправильная почта или пароль!');
       }
-      res.send({ message: 'Неудачная авторизация!' });
+      bcrypt.compare(password, user.password) //  аутентификация
+        .then((matched) => {
+          if (!matched) {
+            throw new AuthError('Неправильная почта или пароль!');
+          }
+          const token = jwt.sign(
+            { _id: user._id },
+            JWT_KEY,
+            { expiresIn: '7d' },
+          );
+          res.send({ message: 'Успешная авторизация!', token });
+        });
     })
     .catch(() => {
       throw new AuthError('Ошибка авторизации!');
