@@ -234,15 +234,16 @@ class App extends Component {
     Auth.authorize(userEmail, userPassword)
       .then((data) => {
         console.log(data);
-        console.log(token);
+        console.log(data.token);
         if (data !== undefined && data.token) {
           localStorage.setItem('jwt', data.token);
+          /*
           this.setState({
             loggedIn: true,
             userEmail: userEmail,
           });
-          this.getUserAndCards();
-          this.props.history.push("/main");
+          */
+          this.tokenCheck();
         } else {
           this.openTooltipFail();
         }
