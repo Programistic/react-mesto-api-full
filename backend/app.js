@@ -44,8 +44,8 @@ app.get('/crash-test', () => {
 app.use(signup);
 app.use(signin);
 
-app.use('/users', preflight, auth, userRouter);
-app.use('/cards', preflight, auth, cardsRouter);
+app.use('/users', auth, userRouter);
+app.use('/cards', auth, cardsRouter);
 
 app.use((req, res, next) => {
   Promise.reject(new FoundError('Ресурс не найден!'))
