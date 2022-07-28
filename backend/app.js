@@ -14,11 +14,6 @@ const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
 // const options = require('./utils/constants');
-const allowedCors = [
-  'https://frontend.mesto.students.nomoredomains.xyz',
-  'http://frontend.mesto.students.nomoredomains.xyz',
-  'localhost:3000',
-];
 
 const preflight = require('./middlewares/preflight');
 
@@ -33,14 +28,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
-});
-
-app.use((req, res, next) => {
-  const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  next();
 });
 
 app.use(requestLogger);
