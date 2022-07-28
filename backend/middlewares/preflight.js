@@ -11,12 +11,14 @@ module.exports = (req, res, next) => {
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-  } else {
-    const { origin } = req.headers;
-    if (allowedCors.includes(origin)) {
-      res.header('Access-Control-Allow-Origin', origin);
-    }
+    return res.end();
   }
-  res.end();
-  next();
+
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    return res.end();
+  }
+
+  return next();
 };
