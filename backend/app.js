@@ -4,7 +4,7 @@ const express = require('express');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 // const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
@@ -13,25 +13,19 @@ const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
+// const options = require('./utils/constants');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
-
-const options = {
-  origin: [
-    'http://localhost:3000',
-    'https://frontend.mesto.students.nomoredomains.xyz',
-    'http://frontend.mesto.students.nomoredomains.xyz',
-    'https://backend.mesto.students.nomoredomains.xyz',
-    'http://backend.mesto.students.nomoredomains.xyz',
-  ],
-  credentials: true,
-};
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use('*', cors(options));
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  res.send(origin);
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

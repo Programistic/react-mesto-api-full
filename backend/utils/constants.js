@@ -19,7 +19,6 @@ const options = {
     'https://frontend.mesto.students.nomoredomains.xyz',
     'http://frontend.mesto.students.nomoredomains.xyz',
   ],
-  credentials: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
