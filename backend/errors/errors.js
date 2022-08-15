@@ -59,7 +59,7 @@ module.exports = {
   handleDeleteCardFound,
   handleCheckCardOwner,
   handleUserFound,
-  handleAuthError,
   handleConflictError,
+  handleAuthError,
   handleError,
 };

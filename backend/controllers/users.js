@@ -107,26 +107,6 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
-/*
-const login = (req, res, next) => {
-  const { userEmail, userPassword } = req.body;
-  User.findUserByCredentials({ userEmail, userPassword })
-    .then((user) => {
-      if (!user) {
-        throw new AuthError('Неправильная почта или пароль!');
-      } else {
-        const token = jwt.sign(
-          { _id: user._id },
-          NODE_ENV === 'production' ? JWT_KEY : '123',
-          { expiresIn: '7d' },
-        );
-        res.send({ data: token });
-      }
-    })
-    .catch(next);
-};
-*/
-
 module.exports = {
   getAllUsers,
   getCurrentUser,

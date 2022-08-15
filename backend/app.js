@@ -48,6 +48,7 @@ app.get('/crash-test', () => {
 app.use(signup);
 app.use(signin);
 app.use(auth);
+
 app.use('/users', userRouter);
 app.use('/cards', cardsRouter);
 
