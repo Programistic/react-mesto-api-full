@@ -135,6 +135,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.tokenCheck();
+
     api.getUserInfo()
       .then((res) => {
         this.setState({ currentUser: res.user });
@@ -150,8 +152,6 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
-
-    this.tokenCheck();
 
     document.addEventListener('keydown', this.handleEscClick);
     document.addEventListener('click', this.handleOutsideClick);
@@ -186,24 +186,6 @@ class App extends Component {
     });
   };
 
-  getUserAndCards = () => {
-    api.getUserInfo()
-      .then((res) => {
-        this.setState({ currentUser: res.user });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    api.getCards()
-      .then((res) => {
-        this.setState({ cards: res.card });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   tokenCheck = () => {
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
@@ -215,9 +197,9 @@ class App extends Component {
               this.setState({
                 loggedIn: true,
                 userEmail: res.user.email,
+              }, () => {
+                this.props.history.push("/main");
               });
-              this.getUserAndCards();
-              this.props.history.push("/main");
             }
           })
           .catch((err) => {
