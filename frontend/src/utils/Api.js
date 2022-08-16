@@ -1,4 +1,5 @@
-const baseURL = `${window.location.protocol}//backend.mesto.students.nomoredomains.xyz`;
+import env from "react-dotenv";
+const baseURL = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`;
 const cardURL = `${baseURL}/cards`;
 const userURL = `${baseURL}/users/me`;
 const avatarURL = `${baseURL}/users/me/avatar`;

@@ -15,7 +15,7 @@ const limiter = rateLimit({
 
 const options = {
   origin: [
-    'http://localhost:3000',
+    'http://localhost:3001',
     'https://frontend.mesto.students.nomoredomains.xyz',
     'http://frontend.mesto.students.nomoredomains.xyz',
   ],

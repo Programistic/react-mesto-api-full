@@ -15,12 +15,9 @@ const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
 const options = require('./utils/constants');
 
-// const preflight = require('./middlewares/preflight');
-
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
 
 const { PORT = 3000 } = process.env;
-// const PORT = 3000;
 
 const app = express();
 
@@ -31,7 +28,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-app.use(cors(options));
+app.use('*', cors(options));
 
 app.use(requestLogger);
 
