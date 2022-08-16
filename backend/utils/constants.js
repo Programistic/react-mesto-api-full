@@ -18,6 +18,8 @@ const options = {
     'http://localhost:3001',
     'https://frontend.mesto.students.nomoredomains.xyz',
     'http://frontend.mesto.students.nomoredomains.xyz',
+    'https://backend.mesto.students.nomoredomains.xyz',
+    'http://backend.mesto.students.nomoredomains.xyz',
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
