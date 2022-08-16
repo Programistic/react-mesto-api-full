@@ -4,23 +4,21 @@ const allowedCors = [
   'http://frontend.mesto.students.nomoredomains.xyz',
   'https://localhost:3000',
   'http://localhost:3000',
+  'https://localhost:3001',
+  'http://localhost:3001',
 ];
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.end();
-    return;
+  } else {
+    const { origin } = req.headers;
+    if (allowedCors.includes(origin)) {
+      res.header('Access-Control-Allow-Origin', origin);
+    }
   }
-
-  const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.end();
-  }
-
-  next();
+  return res.end();
 };

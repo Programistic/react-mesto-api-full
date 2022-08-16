@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
@@ -13,11 +13,12 @@ const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const FoundError = require('./errors/FoundError');
-const options = require('./utils/constants');
+// const options = require('./utils/constants');
+const preflight = require('./middlewares/preflight');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 
@@ -28,7 +29,7 @@ mongoose.connect(DB_CONN, {
   useNewUrlParser: true,
 });
 
-app.use('*', cors(options));
+// app.use('*', cors(options));
 
 app.use(requestLogger);
 
@@ -41,7 +42,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-// app.use(preflight);
+app.use('*', preflight);
 app.use(signup);
 app.use(signin);
 app.use(auth);
