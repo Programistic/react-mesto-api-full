@@ -16,7 +16,7 @@ const cors = require('./middlewares/cors');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
 
-const { PORT = 3001 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
