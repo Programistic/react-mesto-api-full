@@ -8,7 +8,7 @@ class Api {
     this._userURL = userURL;
     this._cardURL = cardURL;
     this._avatarURL = avatarURL;
-    this._headers = { authorization: `Bearer ${localStorage.getItem('jwt') }`, 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    this._headers = { authorization: `Bearer ${localStorage.getItem('jwt')}`, 'Content-Type': 'application/json', 'Accept': 'application/json' }
   }
 
   getUserInfo() {
