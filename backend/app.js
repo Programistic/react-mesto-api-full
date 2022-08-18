@@ -5,7 +5,7 @@ const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const { limiter } = require('./utils/constants');
+const { limiter } = require('./utils/constants');
 const userRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const signup = require('./routes/signup');
@@ -32,7 +32,7 @@ mongoose.connect(DB_CONN, {
 app.use(requestLogger);
 
 // app.use(helmet());
-// app.use(limiter);
+app.use(limiter);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
