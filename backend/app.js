@@ -58,9 +58,9 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use((err, req, res, next) => {
-  if (!err.statusCode) {
-    res.status(500).send({ message: 'Неизвестная ошибка сервера!' });
-  }
+  const statusCode = err.statusCode || 500;
+  const message = statusCode === 500 ? 'На сервере произошла ошибка!' : err.message;
+  res.status(statusCode).send({ message });
   next();
 });
 
