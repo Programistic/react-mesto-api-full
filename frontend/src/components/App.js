@@ -136,73 +136,19 @@ class App extends Component {
 
   componentDidMount() {
     this.tokenCheck();
-
-    /*
-    api.getUserInfo()
-      .then((res) => {
-        this.setState({ currentUser: res.user });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    */
-
-    api.getCards()
-      .then((res) => {
-        this.setState({ cards: res.card });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
     document.addEventListener('keydown', this.handleEscClick);
     document.addEventListener('click', this.handleOutsideClick);
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('prevProps = ');
-    console.log(prevProps);
-    console.log('prevState = ');
-    console.log(prevState);
-    console.log('snapshot = ');
-    console.log(snapshot);
-
-    console.log('this.state.loggedIn = ' + this.state.loggedIn);
-
-    console.log('this.state.currentUser = ');
-    console.log(this.state.currentUser);
-    console.log('this.state.cards = ');
-    console.log(this.state.cards);
-
-    console.log('I updated!!!');
-
-    api.getCards()
-      .then((res) => {
-
-        console.log('in getCards = ')
-        console.log(res);
-
-        this.setState({ cards: res.card });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.currentUser !== this.state.currentUser) {
-      console.log('In If');
-
       api.getCards()
         .then((res) => {
-
-          console.log('in getCards = ')
-          console.log(res);
-
           this.setState({ cards: res.card });
         })
         .catch((err) => {
           console.log(err);
         });
-
     }
   }
 

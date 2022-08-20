@@ -8,19 +8,26 @@ class Api {
     this._userURL = userURL;
     this._cardURL = cardURL;
     this._avatarURL = avatarURL;
-    this._headers = { authorization: `Bearer ${localStorage.getItem('jwt')}`, 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    this._headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+  }
+
+  _headersWithJwt() {
+    return {authorization: `Bearer ${localStorage.getItem('jwt')}`, ...this._headers}
   }
 
   getUserInfo() {
     return fetch(this._userURL, {
-      headers: this._headers,
+      headers: this._headersWithJwt(),
     })
       .then(this._getResponseData);
   }
 
   getCards() {
     return fetch(this._cardURL, {
-      headers: this._headers,
+      headers: this._headersWithJwt(),
     })
       .then(this._getResponseData);
   }
@@ -28,7 +35,7 @@ class Api {
   setUserInfo(userName, userDescription) {
     return fetch(this._userURL, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this._headersWithJwt(),
       body: JSON.stringify({
         name: userName,
         about: userDescription,
@@ -40,7 +47,7 @@ class Api {
   setAvatar(avatarData) {
     return fetch(this._avatarURL, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this._headersWithJwt(),
       body: JSON.stringify({
         avatar: avatarData,
       }),
@@ -51,7 +58,7 @@ class Api {
   setCard(placeName, placeImage) {
     return fetch(this._cardURL, {
       method: 'POST',
-      headers: this._headers,
+      headers: this._headersWithJwt(),
       body: JSON.stringify({
         name: placeName,
         link: placeImage,
@@ -63,7 +70,7 @@ class Api {
   deleteCard(cardID) {
     return fetch(this._cardURL + `/${cardID}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: this._headersWithJwt(),
     })
       .then(this._getResponseData);
   }
@@ -72,13 +79,13 @@ class Api {
     if (!isLiked) {
       return fetch(this._cardURL + `/${cardID}/likes`, {
         method: 'PUT',
-        headers: this._headers,
+        headers: this._headersWithJwt(),
       })
         .then(this._getResponseData);
     } else {
         return fetch(this._cardURL + `/${cardID}/likes`, {
           method: 'DELETE',
-          headers: this._headers,
+          headers: this._headersWithJwt(),
         })
           .then(this._getResponseData);
       }
