@@ -89,7 +89,7 @@ const login = (req, res, next) => {
       if (!user) {
         throw new AuthError('Неправильная почта или пароль!');
       }
-      bcrypt.compare(password, user.password) //  аутентификация
+      return bcrypt.compare(password, user.password) //  аутентификация
         .then((matched) => {
           if (!matched) {
             throw new AuthError('Неправильная почта или пароль!');
