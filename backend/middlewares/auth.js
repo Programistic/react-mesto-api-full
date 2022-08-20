@@ -8,15 +8,16 @@ module.exports = (req, res, next) => {
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     handleAuthError();
-  } else {
-    const token = authorization.replace('Bearer ', '');
-    let payload;
-    try {
-      payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_KEY : '123');
-    } catch (err) {
-      handleAuthError();
-    }
-    req.user = payload;
+    return;
   }
+  const token = authorization.replace('Bearer ', '');
+  let payload;
+  try {
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_KEY : '123');
+  } catch (err) {
+    handleAuthError();
+    return;
+  }
+  req.user = payload;
   next();
 };

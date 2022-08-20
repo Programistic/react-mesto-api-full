@@ -137,6 +137,7 @@ class App extends Component {
   componentDidMount() {
     this.tokenCheck();
 
+    /*
     api.getUserInfo()
       .then((res) => {
         this.setState({ currentUser: res.user });
@@ -144,6 +145,7 @@ class App extends Component {
       .catch((err) => {
         console.log(err);
       });
+    */
 
     api.getCards()
       .then((res) => {
@@ -155,6 +157,53 @@ class App extends Component {
 
     document.addEventListener('keydown', this.handleEscClick);
     document.addEventListener('click', this.handleOutsideClick);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('prevProps = ');
+    console.log(prevProps);
+    console.log('prevState = ');
+    console.log(prevState);
+    console.log('snapshot = ');
+    console.log(snapshot);
+
+    console.log('this.state.loggedIn = ' + this.state.loggedIn);
+
+    console.log('this.state.currentUser = ');
+    console.log(this.state.currentUser);
+    console.log('this.state.cards = ');
+    console.log(this.state.cards);
+
+    console.log('I updated!!!');
+
+    api.getCards()
+      .then((res) => {
+
+        console.log('in getCards = ')
+        console.log(res);
+
+        this.setState({ cards: res.card });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    if (prevState.currentUser !== this.state.currentUser) {
+      console.log('In If');
+
+      api.getCards()
+        .then((res) => {
+
+          console.log('in getCards = ')
+          console.log(res);
+
+          this.setState({ cards: res.card });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+    }
   }
 
   componentWillUnmount() {
@@ -196,6 +245,7 @@ class App extends Component {
             if (res) {
               this.setState({
                 loggedIn: true,
+                currentUser: res.user,
                 userEmail: res.user.email,
               }, () => {
                 this.props.history.push("/main");
@@ -225,7 +275,8 @@ class App extends Component {
   };
 
   handleLoginSubmit = (userEmail, userPassword) => {
-    Auth.authorize(userEmail, userPassword)
+    Auth
+      .authorize(userEmail, userPassword)
       .then((data) => {
         if (data !== undefined && data.token) {
           localStorage.setItem('jwt', data.token);
