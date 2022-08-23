@@ -6,13 +6,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
-// const router = require('./routes/index');
+const router = require('./routes/index');
+/*
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const signup = require('./routes/signup');
 const signin = require('./routes/signin');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/NotFoundError');
+*/
 const cors = require('./middlewares/cors');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
@@ -35,8 +37,9 @@ app.use(requestLogger);
 // app.use(helmet());
 app.use(limiter);
 
-// app.use(router);
+app.use(router);
 
+/*
 app.use(signup);
 app.use(signin);
 app.use(auth);
@@ -47,6 +50,7 @@ app.use((req, res, next) => {
   Promise.reject(new NotFoundError('Ресурс не найден!'))
     .catch(next);
 });
+*/
 
 app.use(errorLogger);
 
