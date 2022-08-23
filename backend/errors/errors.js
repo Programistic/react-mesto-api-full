@@ -1,4 +1,4 @@
-const FoundError = require('./FoundError');
+const NotFoundError = require('./NotFoundError');
 const AuthError = require('./AuthError');
 const RequestError = require('./RequestError');
 const ConflictError = require('./ConflictError');
@@ -6,7 +6,7 @@ const UnauthRequestError = require('./UnauthRequestError');
 
 const handleCardFound = (card, res) => {
   if (!card) {
-    throw new FoundError('Карточка не найдена!');
+    throw new NotFoundError('Карточка не найдена!');
   } else {
     res.send({ card });
   }
@@ -14,7 +14,7 @@ const handleCardFound = (card, res) => {
 
 const handleDeleteCardFound = (card) => {
   if (!card) {
-    throw new FoundError('Удаляемая карточка не найдена!');
+    throw new NotFoundError('Удаляемая карточка не найдена!');
   }
 };
 
@@ -26,7 +26,7 @@ const handleCheckCardOwner = (card, req) => {
 
 const handleUserFound = (user, res) => {
   if (!user) {
-    throw new FoundError('Пользователь не найден!');
+    throw new NotFoundError('Пользователь не найден!');
   } else {
     res.send({ user });
   }
