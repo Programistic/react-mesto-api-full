@@ -8,17 +8,6 @@ const { createUser, login } = require('../controllers/users');
 const NotFoundError = require('../errors/NotFoundError');
 
 router.post(
-  '/signin',
-  celebrate({
-    [Segments.BODY]: Joi.object().keys({
-      email: Joi.string().required().email(),
-      password: Joi.string().required(),
-    }),
-  }),
-  login,
-);
-
-router.post(
   '/signup',
   celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -30,6 +19,17 @@ router.post(
     }),
   }),
   createUser,
+);
+
+router.post(
+  '/signin',
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      email: Joi.string().required().email(),
+      password: Joi.string().required(),
+    }),
+  }),
+  login,
 );
 
 router.use(auth);
