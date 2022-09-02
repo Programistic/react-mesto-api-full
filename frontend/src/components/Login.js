@@ -23,7 +23,7 @@ function Login({ handleLoginSubmit }) {
   return (
     <div className="entry-screen">
       <h2 className="entry-screen__heading">Вход</h2>
-      <form className="form" onSubmit={handleSubmit} novalidate>
+      <form className="form" onSubmit={handleSubmit} noValidate>
         <fieldset className="form__fieldset form__fieldset_location_entry-screen">
           <div className="form__field">
             <input id="user-email-input" className="form__input form__input_theme_black form__input_location_entry-screen" type="email" name="user-email" value={userEmail || ''} onChange={handleEmailChange} placeholder="Email" required />
