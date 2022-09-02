@@ -6,9 +6,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
-const routes = require('./routes/index');
+// const routes = require('./routes/index');
 const cors = require('./middlewares/cors');
 const handleServerError = require('./middlewares/handleServerError');
+const userRouter = require('./routes/users');
+const cardsRouter = require('./routes/cards');
+const signup = require('./routes/signup');
+const signin = require('./routes/signin');
+const auth = require('./middlewares/auth');
+const NotFoundError = require('./errors/NotFoundError');
 
 const DB_CONN = 'mongodb://localhost:27017/mestodb';
 
@@ -30,7 +36,17 @@ app.use(requestLogger);
 // app.use(helmet());
 app.use(limiter);
 
-app.use(routes);
+app.use(signup);
+app.use(signin);
+
+app.use(auth);
+
+app.use('/users', userRouter);
+app.use('/cards', cardsRouter);
+
+app.use((req, res, next) => {
+  next(new NotFoundError('Маршрут не найден!'));
+});
 
 app.use(errorLogger);
 app.use(errors());
