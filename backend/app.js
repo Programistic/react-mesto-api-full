@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { limiter } = require('./utils/constants');
-const router = require('./routes/index');
+const routes = require('./routes/index');
 const cors = require('./middlewares/cors');
 const handleServerError = require('./middlewares/handleServerError');
 
@@ -16,7 +16,7 @@ const { PORT = 3001 } = process.env;
 
 const app = express();
 
-app.use(cors);
+app.use('*', cors);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,7 +30,7 @@ app.use(requestLogger);
 // app.use(helmet());
 app.use(limiter);
 
-app.use(router);
+app.use(routes);
 
 app.use(errorLogger);
 app.use(errors());
